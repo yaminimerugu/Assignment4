@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1",
+  "schemaName": "",
+  "migrations": [
+    {
+      "category": "",
+      "version": "1",
+      "description": "<< Flyway Baseline >>",
+      "type": "BASELINE",
+      "installedOn": "2025-04-02 20:11:06.0",
+      "installedOnUTC": "2025-04-02T20:11:06Z",
+      "state": "Baseline",
+      "undoable": "",
+      "filepath": "/workspaces/Assignment4/migrations/V1__Create_subscribers_table.sql",
+      "installedBy": "root",
+      "executionTime": 0
+    }
+  ],
+  "allSchemasEmpty": false,
+  "flywayVersion": "7.10.0",
+  "database": "subscribers_db",
+  "warnings": [],
+  "operation": "info"
+}
