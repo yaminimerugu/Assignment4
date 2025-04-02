@@ -1,0 +1,38 @@
+---
+- name: Setup MySQL Database and Apply Migrations
+  hosts: localhost
+  tasks:
+    - name: Install MySQL Server
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Start MySQL Service
+      service:
+        name: mysql
+        state: started
+
+    - name: Create Database
+      mysql_db:
+        name: subscribers_db
+        state: present
+        login_user: root
+        login_password: Root@123
+
+    - name: Create Subscribers Table (if not exists)
+      mysql_query:
+        login_user: root
+        login_password: Root@123
+        login_db: subscribers_db
+        query: "CREATE TABLE IF NOT EXISTS subscribers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255));"
+
+    - name: Setup Flyway Configuration
+      copy:
+        dest: /etc/flyway.conf
+        content: |
+          flyway.url=jdbc:mysql://localhost:3306/subscribers_db
+          flyway.user=root
+          flyway.password=Root@123
+
+    - name: Apply Migrations Using Flyway
+      command: flyway -url=jdbc:mysql://localhost:3306/subscribers_db -user=root -password=Root@123 -locations=filesystem:/workspaces/Assignment4/migrations migrate -X

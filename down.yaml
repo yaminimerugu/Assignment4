@@ -1,0 +1,20 @@
+# - name: Backup Data and Shutdown MySQL
+#   hosts: db_server
+#   become: yes
+#   tasks:
+#     - name: Export data before shutdown
+#       command: mysqldump -u root -proot subscribers > /tmp/subscribers_backup.sql
+
+#     - name: Stop MySQL Service
+#       service:
+#         name: mysql
+#         state: stopped
+
+
+- name: Backup Data and Shutdown MySQL
+  hosts: localhost
+  tasks:
+    - name: Stop MySQL service
+      ansible.builtin.service:
+        name: mysql
+        state: stopped
